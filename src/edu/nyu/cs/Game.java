@@ -8,8 +8,8 @@ import org.apache.commons.lang3.SystemUtils;
 import processing.core.*; // import the base Processing library
 
 /**
- * In this game, you will be shooting down flying plates with a bow and arrow. You will be given a score of 
- * how many plates you shot down at the end of the game. 
+ * In this game, you will be shooting down flying plates with a bow and arrow (similar to skeet shooting). 
+ * You will be given a score of how many plates you shot down at the end of the game. 
  * 
  * @author Emily Kim
  * @version 0.1
