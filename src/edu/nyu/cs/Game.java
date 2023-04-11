@@ -65,19 +65,19 @@ public class Game extends PApplet {
 	public void setup() {
 
 		// load up an image of sky
-			String cwd = Paths.get("").toAbsolutePath().toString(); // the current working directory as an absolute path
-			String pathSky = Paths.get(cwd, "images", "sky.png").toString(); // the relative path to the sky image
+		String cwd = Paths.get("").toAbsolutePath().toString(); // the current working directory as an absolute path
+		String pathSky = Paths.get(cwd, "images", "sky.png").toString(); // the relative path to the sky image
 		this.imgSky = loadImage(pathSky); 
 
 		// create some plates
 		for (int i=0; i<this.NUM_PLATES; i++) {
-		// create a plate and add it to the array list
-		int x = (int) (Math.random() * (this.width/2 - APP_MARGIN)) - APP_MARGIN;
-		int y = (int) (Math.random() * ((this.height - 250) + 20)) + 20;
+			// create a plate and add it to the array list
+			int x = (int) (Math.random() * (this.width/2 - APP_MARGIN)) - APP_MARGIN;
+			int y = (int) (Math.random() * ((this.height - 250) + 20)) + 20;
 
 			String pathPlate = Paths.get(cwd, "images", "plate.png").toString(); // the relative path to the plate image
-		Plate plate = new Plate(this, pathPlate, x, y);
-		this.plates.add(plate);
+			Plate plate = new Plate(this, pathPlate, x, y);
+			this.plates.add(plate);
 		}
 
 		// create bow
@@ -105,9 +105,9 @@ public class Game extends PApplet {
 
 		// create plates and draw them on the screen
 		for (int i=0; i<this.plates.size(); i++) {
-		Plate plate = this.plates.get(i); // get the current Plate object from the ArrayList
-		plate.move(); 
-		plate.draw(); 
+			Plate plate = this.plates.get(i); // get the current Plate object from the ArrayList
+			plate.move(); 
+			plate.draw(); 
 		}
 
 		ArrayList<Plate> platesToRemove = new  ArrayList<Plate>(); //will hold the next generation of plates
