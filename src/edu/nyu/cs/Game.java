@@ -35,7 +35,7 @@ public class Game extends PApplet {
 		return this.plates;
 	}
 
-  /**
+  	/**
 	 * Setter for the ArrayList of Plate objects currently on the screen.
 	 * @param plates An ArrayList of Plate objects
 	 */
@@ -64,67 +64,67 @@ public class Game extends PApplet {
 	 */
 	public void setup() {
 
-    // load up an image of sky
-		String cwd = Paths.get("").toAbsolutePath().toString(); // the current working directory as an absolute path
-		String pathSky = Paths.get(cwd, "images", "sky.png").toString(); // the relative path to the sky image
-    this.imgSky = loadImage(pathSky); 
+		// load up an image of sky
+			String cwd = Paths.get("").toAbsolutePath().toString(); // the current working directory as an absolute path
+			String pathSky = Paths.get(cwd, "images", "sky.png").toString(); // the relative path to the sky image
+		this.imgSky = loadImage(pathSky); 
 
-    // create some plates
-    for (int i=0; i<this.NUM_PLATES; i++) {
-      // create a plate and add it to the array list
-      int x = (int) (Math.random() * (this.width/2 - APP_MARGIN)) - APP_MARGIN;
-      int y = (int) (Math.random() * ((this.height - 250) + 20)) + 20;
+		// create some plates
+		for (int i=0; i<this.NUM_PLATES; i++) {
+		// create a plate and add it to the array list
+		int x = (int) (Math.random() * (this.width/2 - APP_MARGIN)) - APP_MARGIN;
+		int y = (int) (Math.random() * ((this.height - 250) + 20)) + 20;
 
-  		String pathPlate = Paths.get(cwd, "images", "plate.png").toString(); // the relative path to the plate image
-      Plate plate = new Plate(this, pathPlate, x, y);
-      this.plates.add(plate);
-    }
+			String pathPlate = Paths.get(cwd, "images", "plate.png").toString(); // the relative path to the plate image
+		Plate plate = new Plate(this, pathPlate, x, y);
+		this.plates.add(plate);
+		}
 
-    // create bow
-    this.bow = new Bow(this);
+		// create bow
+		this.bow = new Bow(this);
 
 	}
 
 	/**
 	 * This method is called automatically by Processing every 1/60th of a second by default.
-   * - Use it to modify what is drawn to the screen.
-   * - There are methods for drawing various shapes, including `ellipse()`, `circle()`, `rect()`, `square()`, `triangle()`, `line()`, `point()`, etc.
+   	 * - Use it to modify what is drawn to the screen.
+   	 * - There are methods for drawing various shapes, including `ellipse()`, `circle()`, `rect()`, `square()`, `triangle()`, `line()`, `point()`, etc.
 	 */
 	public void draw() {
 
-    image(this.imgSky, this.width/2, this.height/2); // sky background
+		image(this.imgSky, this.width/2, this.height/2); // sky background
 
-    this.bow.draw(); // user's bow
+		this.bow.draw(); // user's bow
 
-    //loop through ArrayList of arrows
+		//loop through ArrayList of arrows
 		for (int i=0; i<this.arrows.size(); i++) {
 			Shoot arrow = this.arrows.get(i);
 			arrow.move(); //have the arrow  move itself to a new location
 			arrow.draw(); //have the arrow  draw itself to the screen
 		}
 
-    // create plates and draw them on the screen
-    for (int i=0; i<this.plates.size(); i++) {
-      Plate plate = this.plates.get(i); // get the current Plate object from the ArrayList
-      plate.move(); 
-      plate.draw(); 
-    }
+		// create plates and draw them on the screen
+		for (int i=0; i<this.plates.size(); i++) {
+		Plate plate = this.plates.get(i); // get the current Plate object from the ArrayList
+		plate.move(); 
+		plate.draw(); 
+		}
 
-    ArrayList<Plate> platesToRemove = new  ArrayList<Plate>(); //will hold the next generation of plates
+		ArrayList<Plate> platesToRemove = new  ArrayList<Plate>(); //will hold the next generation of plates
 		ArrayList<Shoot> arrowsToRemove = new  ArrayList<Shoot>(); //will hold the next generation of arrows
-		
-    // check for collisions btwn any plates and any arrows
-    for (Shoot arrow : this.arrows) {
+			
+		// check for collisions btwn any plates and any arrows
+		for (Shoot arrow : this.arrows) {
 			for (Plate plate : this.plates) {
 				if (Shoot.isCollision(arrow, plate)) {
-          score += POINTS_PER_PLATE;  
+					score += POINTS_PER_PLATE;  
 					platesToRemove.add(plate); // add this plate to the list  that we will remove
 					arrowsToRemove.add(arrow);  //add this arrow to the  list that we will remove
-          
+			
 				}
 			}
 		}
-		
+			
 		//enter all plates we marked as removable 
 		for (Plate plate : platesToRemove) {
 			plate.kill(); //tell the plate to kill itself
@@ -135,50 +135,51 @@ public class Game extends PApplet {
 			arrow.kill(); //tell the arrow to  kill itself
 		}
 
-    // show the score at the bottom of the window
-    String scoreString = String.format("SCORE: %d", this.score);
-    text(scoreString, this.width/2, this.height-50);
+		// show the score at the bottom of the window
+		String scoreString = String.format("SCORE: %d", this.score);
+		text(scoreString, this.width/2, this.height-50);
+	
 
 	}
 
 	/**
 	 * This method is automatically called by Processing every time the user clicks a mouse button.
 	 * - The `mouseX` and `mouseY` variables are automatically is assigned the coordinates on the screen when the mouse was clicked.
-   * - The `mouseButton` variable is automatically assigned the value of either the PApplet.LEFT or PApplet.RIGHT constants, depending upon which button was pressed.
-   */
+     * - The `mouseButton` variable is automatically assigned the value of either the PApplet.LEFT or PApplet.RIGHT constants, depending upon which button was pressed.
+     */
 	public void mouseClicked() {
 		System.out.println(String.format("Mouse clicked at: %d:%d.", this.mouseX, this.mouseY));
 
-    this.bow.shoot();
+    	this.bow.shoot();
 	}
 
-  /**
-   * This method is used to replace the mouse cursor with a bow.
-   */
-  public void mouseMoved() {
-    noCursor();
-    this.bow.setX(mouseX);
-  }
+	/**
+	 * This method is used to replace the mouse cursor with a bow.
+	 */
+	public void mouseMoved() {
+		noCursor();
+		this.bow.setX(mouseX);
+	}
 
-  /**
-   * A method that can be used to modify settings of the window, such as set its size.
-   * This method shouldn't really be used for anything else.  
-   * Use the setup() method for most other tasks to perform when the program first runs.
-   */
-  public void settings() {
+	/**
+	 * A method that can be used to modify settings of the window, such as set its size.
+	 * This method shouldn't really be used for anything else.  
+	 * Use the setup() method for most other tasks to perform when the program first runs.
+	 */
+	public void settings() {
 		this.size(1200, 800); // set the map window size, using the OpenGL 2D rendering engine
 		System.out.println(String.format("Set up the window size: %d, %d.", width, height));    
-  }
+	}
 
-  /**
-   * The main function is automatically called first in a Java program.
-   * When using the Processing library, this method must call PApplet's main method and pass it the full class name, including package.
-   * You shouldn't need to modify this method.
-   * 
-   * @param args An array of any command-line arguments.
-   */
-  public static void main(String[] args) {
-    // make sure we're using Java 1.8
+	/**
+	 * The main function is automatically called first in a Java program.
+	 * When using the Processing library, this method must call PApplet's main method and pass it the full class name, including package.
+	 * You shouldn't need to modify this method.
+	 * 
+	 * @param args An array of any command-line arguments.
+	 */
+	public static void main(String[] args) {
+		// make sure we're using Java 1.8
 		System.out.printf("\n###  JDK IN USE ###\n- Version: %s\n- Location: %s\n### ^JDK IN USE ###\n\n", SystemUtils.JAVA_VERSION, SystemUtils.getJavaHome());
 		boolean isGoodJDK = SystemUtils.IS_JAVA_1_8;
 		if (!isGoodJDK) {
@@ -187,6 +188,6 @@ public class Game extends PApplet {
 		else {
 			PApplet.main("edu.nyu.cs.Game"); // do not modify this!
 		}
-  }
+	}
 
 }
