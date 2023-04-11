@@ -16,18 +16,18 @@ import processing.core.*; // import the base Processing library
  */
 public class Game extends PApplet {
 
-  private PImage imgSky; // will hold a photo of sky
+	private PImage imgSky; // will hold a photo of sky
 
 	private ArrayList<Shoot> arrows = new  ArrayList<Shoot>(); // will hold an ArrayList of Shoot objects (arrows)
-  private ArrayList<Plate> plates = new ArrayList<Plate>(); // will hold an ArrayList of Plate objects
-  private int score = 0; // the user's score
-  private Bow bow; // will hold the user's bow (cursor)
+	private ArrayList<Plate> plates = new ArrayList<Plate>(); // will hold an ArrayList of Plate objects
+	private int score = 0; // the user's score
+	private Bow bow; // will hold the user's bow (cursor)
 
-  private final int NUM_PLATES = 20; // the number of plates to create
-  private final int POINTS_PER_PLATE = 1; // the number of points to award the user for each star they destroy
-  public final static int APP_MARGIN = 100; // a default integer for spacing the screen's drawings
+	private final int NUM_PLATES = 20; // the number of plates to create
+	private final int POINTS_PER_PLATE = 1; // the number of points to award the user for each star they destroy
+	public final static int APP_MARGIN = 100; // a default integer for spacing the screen's drawings
 
-  /**
+  	/**
 	 * Getter for the ArrayList of Plate objects currently on the screen
 	 * @return ArrayList of Plate objects
 	 */
